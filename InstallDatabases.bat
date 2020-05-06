@@ -5,15 +5,15 @@ set mysql=Tools\
 set svr=localhost
 set newuser=mangos
 set user=root
-set pass=mangos
+set pass=root
 set newpass=mangos
 set port=3306
 set wdb=mangos1
 set wdborig=mangos1
 set cdb=character1
 set cdborig=character1
-set rdb=realmd
-set rdborig=realmd
+set rdb=realmd1
+set rdborig=realmd1
 
 rem -- Don't change past this point --
 set LOCList=NO
@@ -491,7 +491,9 @@ echo ^| Creating World Database                                                 
 echo ^|_____________________________________________________________________________^|%colReset%
 echo %colReset% 
 echo %colReset% Creating Database %wdb%
-%mysql%mysql -q -s -h %svr% --user=%user% --password=%pass% --port=%port% -e "create database %wdb%";
+echo "set global max_allowed_packet=2684354560"
+%mysql%mysql -q -s -h %svr% --user=%user% --password=%pass% --port=%port% -e "set global max_allowed_packet=2684354560";
+%mysql%mysql -q -s -h %svr% --user=%user% --password=%pass% --port=%port% -e "CREATE DATABASE IF NOT EXISTS %wdb% DEFAULT CHARSET utf8 COLLATE utf8_general_ci";
 goto WorldDB2:
 
 :WorldDB3
@@ -522,7 +524,7 @@ echo ^| Creating Character Database                                             
 echo ^|_____________________________________________________________________________^|%colReset%
 echo %colReset% 
 echo %colReset% Creating Database %cdb%
-%mysql%mysql -q -s -h %svr% --user=%user% --password=%pass% --port=%port% -e "create database %cdb%";
+%mysql%mysql -q -s -h %svr% --user=%user% --password=%pass% --port=%port% -e "CREATE DATABASE IF NOT EXISTS %cdb% DEFAULT CHARSET utf8 COLLATE utf8_general_ci";
 goto CharDB2:
 
 :CharDB3
@@ -543,7 +545,7 @@ echo ^| Creating Realm Database                                                 
 echo ^|_____________________________________________________________________________^|%colReset%
 echo %colReset% 
 echo %colReset% Creating Database %rdb%
-%mysql%mysql -q -s -h %svr% --user=%user% --password=%pass% --port=%port% -e "create database %rdb%";
+%mysql%mysql -q -s -h %svr% --user=%user% --password=%pass% --port=%port% -e "CREATE DATABASE IF NOT EXISTS %rdb% DEFAULT CHARSET utf8 COLLATE utf8_general_ci";
 goto RealmDB2:
 
 :RealmDB3

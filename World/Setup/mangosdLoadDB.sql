@@ -1032,6 +1032,7 @@ CREATE TABLE `gameobject` (
   `spawntimesecs` int(11) NOT NULL DEFAULT '0' COMMENT 'The respawn time for the game object, defined in seconds till respawn.',
   `animprogress` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'Not really known what this is used for at this time (see description).',
   `state` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `event` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT 'by pzx add',
   PRIMARY KEY (`guid`),
   KEY `idx_map` (`map`),
   KEY `idx_id` (`id`)
